@@ -40,7 +40,7 @@ public class Author extends CRUD {
 
 					BufferedWriter bufferWriter = new BufferedWriter(fileWriter);
 
-					bufferWriter.newLine();
+					//bufferWriter.newLine();
 					bufferWriter.write(authorId + ":" + authorName); // add to end of file
 					System.out.println("Success, author was added.");
 					bufferWriter.close();

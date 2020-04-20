@@ -7,13 +7,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public abstract class CRUD {
 	private int type;
@@ -73,6 +70,7 @@ public abstract class CRUD {
 			System.out.println("Enter entry ID to delete: ");
 			try {
 				int selection = userInput.nextInt();
+				System.out.println("selection: " + selection);
 				if (deleteFile(getType(), Integer.toString(selection)) == true) {
 					System.out.println("Success, entry was deleted.");
 				} else {
@@ -92,7 +90,7 @@ public abstract class CRUD {
 	 * @return boolean
 	 */
 	public boolean idFound(String id, Integer type) {
-		try (BufferedReader bufStream = new BufferedReader(new FileReader(getFileMap().get(getType())))) {
+		try (BufferedReader bufStream = new BufferedReader(new FileReader(getFileMap().get(type)))) {
 			String line = bufStream.readLine();
 			while (line != null) {
 				String[] splits = line.split(":");
@@ -152,8 +150,8 @@ public abstract class CRUD {
 						printWriter.append(toUpdateId + toUpdateInfo);
 						printWriter.flush();
 						printWriter.close();
-						file.delete();
-						tempFile.renameTo(file);
+						file.delete(); // delete old file
+						tempFile.renameTo(file); //rename new file to old file name
 						System.out.println("Success, entry was updated.");
 					}
 				} catch (IOException e) {
@@ -166,14 +164,14 @@ public abstract class CRUD {
 	public boolean deleteFile(Integer type, String toDelete) {
 
 		File file = new File(getFileMap().get(type)); // current file
-		List<String> toRemove = null;
+		List<String> toRemove = null; // to store what will be removed 
 		File tempFile = new File("./resources/temp.txt");// temp file
-		try (PrintWriter printWriter = new PrintWriter(new FileWriter(tempFile));) { // write to temp file
-			// if(type == 3) { //if book
+		
+		try (PrintWriter printWriter = new PrintWriter(new FileWriter(tempFile))) { // write to temp file
+
 			toRemove = Files.lines(file.toPath()) // save book to be removed
 					.filter(line -> line.substring(0, line.indexOf(":")).equals(toDelete)).collect(Collectors.toList());
-			;
-			// }
+
 			if (toRemove.isEmpty() == true) {
 				System.out.println("ID was not found in file");
 				return false;
@@ -199,9 +197,10 @@ public abstract class CRUD {
 		}
 	}
 
-	public static void main(String[] args) {
-//		CRUD reader = new CRUD(1);
-//		reader.fileReader();
+//	public static void main(String[] args) {
+//		Author reader = Author.getInstance( );
+//		Integer type = new Integer(1);
+//		reader.deleteFile(type,"1");
 //		System.out.println(reader.getType());
-	}
+//	}
 }
