@@ -16,10 +16,9 @@ public class UserInterface extends Format {
 		System.out.println("-------------------------");
 
 		while (moveOn == false) {
-//			userInterface.mainMenu();
-			while (onMainMenu == true) { // try1
+			while (onMainMenu == true) { 
 //				try {
-					userInterface.mainMenu();
+					userInterface.mainMenu(); // main menu
 					System.out.println("\nSelection: ");
 					selection = userInput.nextInt();
 					onMainMenu = false;
@@ -29,8 +28,7 @@ public class UserInterface extends Format {
 //
 //				}
 			}
-//			while (moveOn == false) {
-				while (onActionMenu == true) { // try1
+				while (onActionMenu == true) { // CRUD options
 					userInterface.setSelectedType(selection);
 					if (userInterface.getSelectedType() == 0) { // Quit program
 						System.out.println("\n-------------------------");
@@ -67,29 +65,29 @@ public class UserInterface extends Format {
 							System.out.println("	" + userInterface.typeToString());
 							System.out.println("-------------------------");
 							switch (userInterface.getSelectedType()) {
-							case 1:
-								Author author = new Author("1", "Test");
-								author.doCRUD(userInterface.getSelectedAction(),userInput);
-								onMainMenu = true;
+							case 1://Do a CRUD method for Author
+								Author author = Author.getInstance( );
+								author.doCRUD(userInterface.getSelectedAction(),userInput); 
+								onMainMenu = true;//go back to main menu
 								onActionMenu = false;
 								break;
-							case 2:
-								Publisher publisher = new Publisher("1", "Test", "Test");
+							case 2: //Do a CRUD method for Publisher
+								Publisher publisher = Publisher.getInstance( );
 								publisher.doCRUD(userInterface.getSelectedAction(),userInput);
-								onMainMenu = true;
+								onMainMenu = true; //go back to main menu
 								onActionMenu = false;
 								break;
-							case 3:
-								Book book = new Book("1", "Test", "Test", "Test");
+							case 3: //Do a CRUD method for Book
+								Book book = Book.getInstance( );
 								book.doCRUD(userInterface.getSelectedAction(),userInput);
-								onMainMenu = true;
+								onMainMenu = true; //go back to main menu
 								onActionMenu = false;
 								break;
 							}
 							
 							System.out.println("-------------------------");
 						} else {
-							userInterface.setSelectedType(selection);
+							userInterface.setSelectedType(selection); //close program 
 							System.out.println("error");
 							onMainMenu = false;
 							onActionMenu = false;
@@ -99,9 +97,8 @@ public class UserInterface extends Format {
 					} else { //Invalid number from main menu
 						System.out.println("Please try again. Enter a vaild number.");
 					}
-				}//actionm
+				}
 
-		}//moveon
-//		userInput.close();
-	}//maim
-}//file
+		}
+	}
+}

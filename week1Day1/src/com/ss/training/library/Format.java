@@ -56,25 +56,6 @@ public class Format {
 
 	}
 	
-//	/**
-//	 * converts home main choice to words
-//	 */
-//	public Object typeToObject(int type) {
-//		switch (type) {
-//		case 1:
-//			Author author = new Author("1", "Test");
-//			return author;
-//
-//		case 2:
-//			Publisher publisher = new Publisher("1", "Test", "Test");
-//			return publisher;
-//
-//		case 3:
-//			Book book = new Book("1", "Test", "1", "1");
-//			return book;
-//		}
-//
-//	}
 
 	/**
 	 * prints the main menu

@@ -1,4 +1,4 @@
-package com.ss.training.library;
+package com.ss.training.object.library;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -92,7 +92,12 @@ public abstract class CRUD {
 	 * @return boolean
 	 */
 	public boolean idFound(String id, Integer type) {
-		try (BufferedReader bufStream = new BufferedReader(new FileReader(getFileMap().get(getType())))) {
+		HashMap<Integer, String> fileMap = new HashMap<Integer, String>();
+		fileMap.put(1, "./resources/author.txt");
+		fileMap.put(2, "./resources/publisher.txt");
+		fileMap.put(3, "./resources/book.txt");
+
+		try (BufferedReader bufStream = new BufferedReader(new FileReader(fileMap.get(type)))) {
 			String line = bufStream.readLine();
 			while (line != null) {
 				String[] splits = line.split(":");
@@ -117,7 +122,17 @@ public abstract class CRUD {
 
 	abstract String askForInfo(Scanner userInput);
 
-	abstract public boolean fileReader();
+	public void fileReader() {
+		try (Stream<String> readerStream = Files.lines(Paths.get(getFileMap().get(getType())))) {
+			readerStream.forEach(line -> {
+				String[] lineItems = line.split(":");
+				System.out.println(Arrays.toString(lineItems));
+			});
+		} catch (IOException e) {
+			System.out.println("Error, was not able to update.");
+			e.printStackTrace();
+		}
+	}
 
 	public void updateFileEntry(Scanner userInput) {
 		String info = askForInfo(userInput);
