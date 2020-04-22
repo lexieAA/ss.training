@@ -184,11 +184,17 @@ public abstract class CRUD {
 			printWriter.close();
 			file.delete();
 			tempFile.renameTo(file); // renames temp file to old file name
-//			System.out.println("The following Book was removed" + toRemove);
-			if (type == 3) {
+			
+			if (type == 1) {
+				System.out.println(toRemove.get(0).split(":")[1]);
 				String[] splits = toRemove.get(0).split(":");
-				deleteFile(1, splits[2]); // removes author
-				deleteFile(2, splits[3]); // removes publisher
+				deleteInBookFile(2, splits[0]); // removes author from books
+			}
+			if (type == 2) {
+				String[] splits = toRemove.get(0).split(":");
+				System.out.println(splits[0]);
+				deleteInBookFile(3, splits[0]); // removes publisher from books
+				
 			}
 			return true; // Success, entry was deleted.
 		} catch (IOException e) {
@@ -197,10 +203,25 @@ public abstract class CRUD {
 		}
 	}
 
-//	public static void main(String[] args) {
-//		Author reader = Author.getInstance( );
-//		Integer type = new Integer(1);
-//		reader.deleteFile(type,"1");
-//		System.out.println(reader.getType());
-//	}
+	public boolean deleteInBookFile(Integer typeIndex, String toDelete) {
+
+		File file = new File("./resources/book.txt"); // current file
+		File tempFile = new File("./resources/temp.txt");// temp file
+		System.out.println("index" + Integer.parseInt(typeIndex.toString()));
+		System.out.println("todelete" + toDelete);
+		try (PrintWriter printWriter = new PrintWriter(new FileWriter(tempFile))) { // write to temp file
+			Files.lines(file.toPath()).filter(line -> !(line.split(":")[Integer.parseInt(typeIndex.toString())]).equals(toDelete))
+					.forEach(line -> {
+						printWriter.println(line);
+					});
+			printWriter.flush();
+			printWriter.close();
+			file.delete();
+			tempFile.renameTo(file); // renames temp file to old file name
+	} catch (IOException e) {
+		e.printStackTrace();
+		return false; // Error, was not able to delete.
+	}
+		return true;
+}
 }
