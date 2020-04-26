@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 public abstract class CRUD {
 	private int type;
-	private HashMap<Integer, String> fileMap = new HashMap<Integer, String>() {
+	private HashMap<Integer, String> fileMap = new HashMap<Integer, String>() { ///To improve
 		/**
 		* 
 		*/
@@ -173,7 +173,7 @@ public abstract class CRUD {
 					.filter(line -> line.substring(0, line.indexOf(":")).equals(toDelete)).collect(Collectors.toList());
 
 			if (toRemove.isEmpty() == true) {
-				System.out.println("ID was not found in file");
+				System.out.println("ID was not found in file"); 
 				return false;
 			}
 			Files.lines(file.toPath()).filter(line -> !line.substring(0, line.indexOf(":")).equals(toDelete))

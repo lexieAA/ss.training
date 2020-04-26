@@ -1,9 +1,3 @@
-1:Noemi Holden:605 S. Hartford Lane West Lafayette, IN 47906
-2:Lucia Sharp:866 1st St. Jeffersonville, IN 47130
-3:Gerardo Chandler:59 Pennington Ave. East Haven, CT 06512
-4:Carly Shelton:28 Bow Ridge St. Buffalo, NY 14215
-7:Greyson Suarez:28 Bow Ridge St. Buffalo, NY 14215
-8:Robert Daniels:128 Red St. Buffalo, NY 14215
 9:Douglas Rocha:605 S. Hartford Lane West Lafayette, IN 47906
 10:Cale Schmidt:59 Pennington Ave. East Haven, CT 06512
 5:Braedon Villa:866 1st St. Jeffersonville, IN 4713

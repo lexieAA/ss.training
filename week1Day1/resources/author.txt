@@ -1,12 +1,8 @@
-1:Isabella Burnett
-2:Darian Bridges
 3:Elianna Wall
 4:Ryan Ray
-5:Celeste Black
 6:Gideon Washington
 7:Sarai Mora
 8:Jasmine Turner
-9:Cherish Lewis
 10:Aydin Blackburn
 11:Armani Turner
 12:Elaina Savage
@@ -17,4 +13,5 @@
 17:Abigail French
 18:Nylah Chen
 19:Scarlet Miles
-20:Antonio Hoover
+200:Nylah Chen
+300:Scarlet Miles
