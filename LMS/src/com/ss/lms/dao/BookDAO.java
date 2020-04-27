@@ -42,7 +42,7 @@ public class BookDAO extends BaseDAO<Book>{
 	}
 	
 	public List<Book> readAllBooksByCardAndBranch(Integer cardNo,Integer branchId) throws ClassNotFoundException, SQLException{
-		return read("SELECT * FROM tbl_book WHERE bookId IN (SELECT bookId FROM tbl_book_loans WHERE cardNo = ? AND branchId = ? AND dateIn IS NULL)", new Object[]{cardNo, branchId});
+		return read("SELECT * FROM tbl_book WHERE bookId IN (SELECT bookId FROM tbl_book_loans WHERE branchId = ? AND cardNo = ? AND dateIn IS NULL)", new Object[]{branchId, cardNo});
 	}
 	
 	public List<Book> readAllBooksByCardAndBranchWithCopy(Integer branchId) throws ClassNotFoundException, SQLException{

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +23,8 @@ public class BookLoanDAO extends BaseDAO<BookLoan>{
 	}
 
 	public void updateBookLoan(BookLoan loan)  throws ClassNotFoundException, SQLException{
-		save("UPDATE tbl_book_loans SET dateIn = CURRENT_TIMESTAMP WHERE bookId = ? AND branchId = ? AND cardNo = ? AND dateOut =?", 
-				new Object[] {loan.getBookId(),loan.getBranchId(), loan.getCardNo(), loan.getDateOut()});
+		save("UPDATE tbl_book_loans SET dateIn = ? WHERE bookId = ? AND branchId = ? AND cardNo = ? AND dateOut =?", 
+				new Object[] {loan.getDateIn(), loan.getBookId(),loan.getBranchId(), loan.getCardNo(), loan.getDateOut()});
 	}
 	public void updateBookLoanDate(BookLoan loan)  throws ClassNotFoundException, SQLException{
 		save("UPDATE tbl_book_loans SET dateOut = CURRENT_TIMESTAMP, dueDate = DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 7 DAY) WHERE bookId = ? AND branchId = ? AND cardNo = ? AND dateOut =?", 

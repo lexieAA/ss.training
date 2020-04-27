@@ -2,6 +2,10 @@ package com.ss.lms.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Calendar;
 import java.util.List;
 
 import com.ss.lms.dao.BookCopiesDAO;
@@ -47,20 +51,27 @@ public class BorrowerService {
 		try {
 			conn = connUtil.getConnection();
 			BookLoanDAO adao = new BookLoanDAO(conn);
-			if(numCopies < 0){
+			if(numCopies != null){
 				BookCopiesDAO cdao = new BookCopiesDAO(conn);
 				BookCopies copy = new BookCopies();
 				copy.setBookId(loan.getBookId());
 				copy.setBranchId(loan.getBranchId());
 				List<BookCopies> copies = cdao.readBookCopy(copy);
-				if(copies.size()==0) {
+				if(copies.size()==0) { //no copies of book find in branch for book
 					cdao.addBookCopies(copy);
+				}else {
+					copy.setNoOfCopies((copies.get(0).getNoOfCopies() + numCopies)); //update copies count
 				}
-				adao.addBookLoan(loan);
-			}else if(numCopies > 0){
-				adao.updateBookLoan(loan);
-			}else{
-				adao.updateBookLoanDate(loan);
+				
+				if(numCopies > 0){ //returned book
+					Calendar calendar = Calendar.getInstance();
+				    java.sql.Date date = new java.sql.Date(calendar.getTime().getTime());
+				    loan.setDateIn(date);
+					System.out.println("time "+loan.getDateIn());
+					adao.updateBookLoan(loan); 
+				}else {//new book loan
+					adao.addBookLoan(loan);	
+				}
 			}
 			conn.commit(); //transaction
 		} catch (ClassNotFoundException | SQLException e) {
@@ -134,10 +145,10 @@ public class BorrowerService {
 		try {
 			conn = connUtil.getConnection();
 			BookDAO bdao = new BookDAO(conn);
-			if(cardNo != null & branchId != null) {
+			if(cardNo != null && branchId != null) {
 				List<Book> books = bdao.readAllBooksByCardAndBranch(cardNo, branchId);//where not turned in
 				return books;
-			}if(branchId != null) {
+			}else if(branchId != null) {
 				List<Book> books = bdao.readAllBooksByCardAndBranchWithCopy(branchId);
 				return books;
 			}else {

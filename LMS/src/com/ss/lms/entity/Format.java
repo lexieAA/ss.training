@@ -38,16 +38,17 @@ public class Format {
 	public static void adminMenu() {
 		System.out.println("			Administrator");
 		System.out.println("------------------------------------------------");
-		System.out.println("\t1)Book and Author");
+		System.out.println("\t1)Author");
 		System.out.println("\t2)Genres");
 		System.out.println("\t3)Publishers");
 		System.out.println("\t4)Library Branches");
 		System.out.println("\t5)Borrowers");
 		System.out.println("\t6)Over-ride Due Date for a Book Loan");
+		System.out.println("\t7)Quite to previous ");
 	}
 	
-	public static void adminMenu(int type) {
-		System.out.println("			" + adminType(type));
+	public static void adminMenu1(int type) {
+		System.out.println(" "+adminType(type));
 		System.out.println("\t1)Add");
 		System.out.println("\t2)Update");
 		System.out.println("\t3)Delete");
@@ -59,7 +60,7 @@ public class Format {
 		String adminType ="";
 		switch (type) {
 			case 1:
-				adminType = "Book";
+				adminType = "Author";
 				break;
 			case 2:
 				adminType = "Genre";
@@ -77,21 +78,13 @@ public class Format {
 		return adminType;
 	}
 	
-//	public static Boolean checkDate(String date ) {
-//		SimpleDateFormat df = new SimpleDateFormat("yy/mm/dd");
-//		Date testDate = null;
-//		try{
-//		    testDate = (Date) df.parse(date);
-//		} catch (ParseException e){ System.out.println("invalid format");}
-//		 
-//		if (!df.format(testDate).equals(date)){
-//		    System.out.println("Invalid date!");
-//		    return false;
-//		} else {
-//			return true;
-//		}
-//
-//	}
+	public static Boolean askName(int selected) {
+		if(selected == 2) {
+			return false;
+		}else {
+			return true;
+		}
+	}
 	
 	public static void borrowerMenu() {
 		System.out.println("			Borrower");
@@ -102,7 +95,7 @@ public class Format {
 	public static void borrowerMenu2() {
 		System.out.println("\t1)Check out a book");
 		System.out.println("\t2)Return a Book");
-		System.out.println("\t3)Quit to Previous \n");
+		System.out.println("\t3)Quit to Previous");
 	}
 
 }
