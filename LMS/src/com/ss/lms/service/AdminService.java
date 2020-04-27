@@ -280,11 +280,11 @@ public class AdminService {
 			conn = connUtil.getConnection();
 			BookLoanDAO adao = new BookLoanDAO(conn);
 			if (dateOut != null) {
-				List<BookLoan> loans = adao.readBookLoanByBookBranchCardNo(loan);
-				return loans;
-			} else {
 				loan.setDateOut(dateOut);
 				List<BookLoan> loans = adao.readAllBookLoansByKeys(loan);
+				return loans;
+			} else {
+				List<BookLoan> loans = adao.readBookLoanByBookBranchCardNo(loan);
 				return loans;
 			}
 		} catch (Exception e) {

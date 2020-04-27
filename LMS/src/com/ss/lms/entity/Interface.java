@@ -350,7 +350,6 @@ public class Interface extends Format {
 									}
 								}
 								mainAdmin1 = false;
-								mainAdmin = false;
 								break;
 							case 6:
 								BookLoan loan = new BookLoan();
@@ -399,9 +398,11 @@ public class Interface extends Format {
 								} catch (SQLException e) {
 									e.printStackTrace();
 								}
+								mainAdmin1 = false;
 								break;
 							case 7:
 								mainAdmin = false;
+								mainAdmin1 = false;
 								break;
 							default:
 								System.out.println(" Invalid Number.");
