@@ -2,10 +2,9 @@ package com.ss.lms.entity;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
-
-import javax.print.attribute.DateTimeSyntax;
 
 import com.ss.lms.service.AdminService;
 import com.ss.lms.service.BorrowerService;
@@ -156,21 +155,21 @@ public class Interface extends Format {
 								adminMenu1(selection);
 								int type = userInput.nextInt();
 								userInput.nextLine(); // Consume newline left-over
-								if (type == 5) {//back to main
+								if (type == 5) {// back to main
 									mainAdmin1 = false;
 									break;
-									}else if(type != 4) {
-									if (type != 1) {//if add new don't ask for id
+								} else if (type != 4) {
+									if (type != 1) {// if add new don't ask for id
 										System.out.println("Enter Author Id: ");
 										selection = userInput.nextInt();
 										userInput.nextLine(); // Consume newline left-over
 										author.setAuthorId(selection);
 									}
-									if(type != 3){
-									System.out.println("Enter Author Name: ");
-									userInput.nextLine();
-									input = userInput.nextLine();
-									author.setAuthorName(input);
+									if (type != 3) {
+										System.out.println("Enter Author Name: ");
+										userInput.nextLine();
+										input = userInput.nextLine();
+										author.setAuthorName(input);
 									}
 									try {
 										adminSer.saveAuthor(author, type);
@@ -191,21 +190,21 @@ public class Interface extends Format {
 								adminMenu1(selection);
 								type = userInput.nextInt();
 								userInput.nextLine(); // Consume newline left-over
-								if (type == 5) {//back to main
+								if (type == 5) {// back to main
 									mainAdmin1 = false;
 									break;
-									}else if(type != 4) {
-									if (type != 1) {//if add new don't ask for id
+								} else if (type != 4) {
+									if (type != 1) {// if add new don't ask for id
 										System.out.println("Enter Genre Id: ");
 										selection = userInput.nextInt();
 										userInput.nextLine(); // Consume newline left-over
 										genre.setGenreId(selection);
 									}
-									if(type != 3){
-									System.out.println("Enter Genre Name: ");
-									userInput.nextLine();
-									input = userInput.nextLine();
-									genre.setGenreName(input);
+									if (type != 3) {
+										System.out.println("Enter Genre Name: ");
+										userInput.nextLine();
+										input = userInput.nextLine();
+										genre.setGenreName(input);
 									}
 									try {
 										adminSer.saveGenre(genre, type);
@@ -226,31 +225,31 @@ public class Interface extends Format {
 								adminMenu1(selection);
 								type = userInput.nextInt();
 								userInput.nextLine(); // Consume newline left-over
-								if (type == 5) {//back to main
+								if (type == 5) {// back to main
 									mainAdmin1 = false;
 									break;
-									}else if(type != 4) {
-									if (type != 1) {//if add new don't ask for id
+								} else if (type != 4) {
+									if (type != 1) {// if add new don't ask for id
 										System.out.println("Enter Publisher Id: ");
 										selection = userInput.nextInt();
 										userInput.nextLine(); // Consume newline left-over
 										publisher.setPublisherId(selection);
 									}
-									if(type != 3){
-									System.out.println("Enter Publisher Name: ");
-									userInput.nextLine();
-									input = userInput.nextLine();
-									publisher.setPublisherName(input);
-									
-									System.out.println("Enter Publisher Address: ");
-									userInput.nextLine();
-									input = userInput.nextLine();
-									publisher.setPublisherAddress(input);
-									
-									System.out.println("Enter Publisher Phone: ");
-									userInput.nextLine();
-									input = userInput.nextLine();
-									publisher.setPublisherPhone(input);
+									if (type != 3) {
+										System.out.println("Enter Publisher Name: ");
+										userInput.nextLine();
+										input = userInput.nextLine();
+										publisher.setPublisherName(input);
+
+										System.out.println("Enter Publisher Address: ");
+										userInput.nextLine();
+										input = userInput.nextLine();
+										publisher.setPublisherAddress(input);
+
+										System.out.println("Enter Publisher Phone: ");
+										userInput.nextLine();
+										input = userInput.nextLine();
+										publisher.setPublisherPhone(input);
 									}
 									try {
 										adminSer.savePublisher(publisher, type);
@@ -271,26 +270,26 @@ public class Interface extends Format {
 								adminMenu1(selection);
 								type = userInput.nextInt();
 								userInput.nextLine(); // Consume newline left-over
-								if (type == 5) {//back to main
+								if (type == 5) {// back to main
 									mainAdmin1 = false;
 									break;
-									}else if(type != 4) {
-									if (type != 1) {//if add new don't ask for id
+								} else if (type != 4) {
+									if (type != 1) {// if add new don't ask for id
 										System.out.println("Enter Library Branch Id: ");
 										selection = userInput.nextInt();
 										userInput.nextLine(); // Consume newline left-over
 										branch.setBranchId(selection);
 									}
-									if(type != 3){
-									System.out.println("Enter Library Branch Name: ");
-									userInput.nextLine();
-									input = userInput.nextLine();
-									branch.setBranchName(input);
-									
-									System.out.println("Enter Library Branch Address: ");
-									userInput.nextLine();
-									input = userInput.nextLine();
-									branch.setBranchAddress(input);
+									if (type != 3) {
+										System.out.println("Enter Library Branch Name: ");
+										userInput.nextLine();
+										input = userInput.nextLine();
+										branch.setBranchName(input);
+
+										System.out.println("Enter Library Branch Address: ");
+										userInput.nextLine();
+										input = userInput.nextLine();
+										branch.setBranchAddress(input);
 									}
 									try {
 										adminSer.saveLibraryBranch(branch, type);
@@ -311,31 +310,31 @@ public class Interface extends Format {
 								adminMenu1(selection);
 								type = userInput.nextInt();
 								userInput.nextLine(); // Consume newline left-over
-								if (type == 5) {//back to main
+								if (type == 5) {// back to main
 									mainAdmin1 = false;
 									break;
-									}else if(type != 4) {
-									if (type != 1) {//if add new don't ask for id
+								} else if (type != 4) {
+									if (type != 1) {// if add new don't ask for id
 										System.out.println("Enter Borrower Card Number: ");
 										selection = userInput.nextInt();
 										userInput.nextLine(); // Consume newline left-over
 										borrower.setCardNo(selection);
 									}
-									if(type != 3){
-									System.out.println("Enter Borrower Name: ");
-									userInput.nextLine();
-									input = userInput.nextLine();
-									borrower.setBorrowerName(input);
-									
-									System.out.println("Enter Borrower Address: ");
-									userInput.nextLine();
-									input = userInput.nextLine();
-									borrower.setBorrowerAddress(input);
-									
-									System.out.println("Enter Borrower Phone: ");
-									userInput.nextLine();
-									input = userInput.nextLine();
-									borrower.setBorrowerPhone(input);
+									if (type != 3) {
+										System.out.println("Enter Borrower Name: ");
+										userInput.nextLine();
+										input = userInput.nextLine();
+										borrower.setBorrowerName(input);
+
+										System.out.println("Enter Borrower Address: ");
+										userInput.nextLine();
+										input = userInput.nextLine();
+										borrower.setBorrowerAddress(input);
+
+										System.out.println("Enter Borrower Phone: ");
+										userInput.nextLine();
+										input = userInput.nextLine();
+										borrower.setBorrowerPhone(input);
 									}
 									try {
 										adminSer.saveBorrower(borrower, type);
@@ -463,26 +462,28 @@ public class Interface extends Format {
 																														// branches
 								branchSelectionIndex = userInput.nextInt();
 								userInput.nextLine(); // Consume newline left-over
-								System.out.println(" card " + borrower.getCardNo());
-								System.out.println(" branch" + branch.get(branchSelectionIndex - 1).getBranchId());
+
 								List<Book> book = borrowerSer.readBook(borrower.getCardNo(),
 										branch.get(branchSelectionIndex - 1).getBranchId());
-
-								int counter = 1;
-								if (book.size() > 0) { // show loan book
+								if (book.size() != 0) { // show loan book
+									int counter = 1;
 									for (Book a : book) {
 										System.out.println("\t" + counter + ") " + a.getTitle());
 										counter++;
 									}
 									bookSelectionIndex = userInput.nextInt();
 									userInput.nextLine(); // Consume newline left-over
+
 									BookLoan loan = new BookLoan(); // create new loan object
 									loan.setBookId(book.get(bookSelectionIndex - 1).getBookId());
 									loan.setBranchId(branch.get(branchSelectionIndex - 1).getBranchId());
 									loan.setCardNo(borrower.getCardNo());
-									List<BookLoan> loans = borrowerSer.readBookloans(loan);
-									System.out.println("for this" + loans.get(0).getBookId());
-									borrowerSer.saveBookLoan(loans.get(0), 1); // update book dateIn time
+
+									List<BookLoan> loanBooks = borrowerSer.readBookloans(loan);
+									Date newDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+									loanBooks.get(0).setDateIn(newDate);
+
+									borrowerSer.saveBookLoan(loanBooks.get(0), 1); // update book dateIn time
 									System.out.println(
 											"\n " + book.get(bookSelectionIndex - 1).getTitle() + " was returned.\n");
 								} else {
@@ -510,6 +511,7 @@ public class Interface extends Format {
 			}
 
 		}
-
+		userInput.close();
 	}
+	
 }

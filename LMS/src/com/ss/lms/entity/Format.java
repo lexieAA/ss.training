@@ -1,10 +1,5 @@
 package com.ss.lms.entity;
 
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Scanner;
-
 public class Format {
 	public static void mainMenu() {
 		System.out.println(" Welcome to the GCIT Library Management System.");
@@ -14,27 +9,26 @@ public class Format {
 		System.out.println("\t2)Administrator");
 		System.out.println("\t3)Borrower");
 	}
-	
+
 	public static void libMenu() {
 		System.out.println("			Librarian");
 		System.out.println("------------------------------------------------");
 		System.out.println("\t1)Enter Branch you manage");
 		System.out.println("\t2)Quite to previous ");
 	}
-	
+
 	public static void libMenu1() {
 		System.out.println("\t1)Update the details of the Library ");
 		System.out.println("\t2)Add copies of Book to the Branch ");
 		System.out.println("\t3)Quite to previous ");
 	}
+
 	public static void libMenu1_1() {
 		System.out.println("\t1)Update the details of the Library ");
 		System.out.println("\t2)Add copies of Book to the Branch ");
 		System.out.println("\t3)Quite to previous ");
 	}
-	
 
-	
 	public static void adminMenu() {
 		System.out.println("			Administrator");
 		System.out.println("------------------------------------------------");
@@ -46,52 +40,52 @@ public class Format {
 		System.out.println("\t6)Over-ride Due Date for a Book Loan");
 		System.out.println("\t7)Quite to previous ");
 	}
-	
+
 	public static void adminMenu1(int type) {
-		System.out.println(" "+adminType(type));
+		System.out.println(" " + adminType(type));
 		System.out.println("\t1)Add");
 		System.out.println("\t2)Update");
 		System.out.println("\t3)Delete");
 		System.out.println("\t4)Read");
 		System.out.println("\t5)Quite to previous");
 	}
-	
-	public static String adminType(int type) {	
-		String adminType ="";
+
+	public static String adminType(int type) {
+		String adminType = "";
 		switch (type) {
-			case 1:
-				adminType = "Author";
-				break;
-			case 2:
-				adminType = "Genre";
-				break;
-			case 3:
-				adminType = "Publisher";
-				break;
-			case 4:
-				adminType = "LibraryBranch";
-				break;
-			case 5:
-				adminType = "Borrower";
-				break;
+		case 1:
+			adminType = "Author";
+			break;
+		case 2:
+			adminType = "Genre";
+			break;
+		case 3:
+			adminType = "Publisher";
+			break;
+		case 4:
+			adminType = "LibraryBranch";
+			break;
+		case 5:
+			adminType = "Borrower";
+			break;
 		}
 		return adminType;
 	}
-	
+
 	public static Boolean askName(int selected) {
-		if(selected == 2) {
+		if (selected == 2) {
 			return false;
-		}else {
+		} else {
 			return true;
 		}
 	}
-	
+
 	public static void borrowerMenu() {
 		System.out.println("			Borrower");
 		System.out.println("------------------------------------------------");
 		System.out.println(" Enter the your Card Number: \n");
 	}
-	
+
 	public static void borrowerMenu2() {
 		System.out.println("\t1)Check out a book");
 		System.out.println("\t2)Return a Book");

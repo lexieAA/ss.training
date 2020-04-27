@@ -13,7 +13,7 @@ public class ConnectionUtil {
 	public final String user = "root";
 	public final String password = "arh26331";
 
-	public Connection getConnection(){
+	public Connection getConnection() {
 		Connection conn = null;
 		try {
 			Class.forName(driver);
@@ -22,11 +22,10 @@ public class ConnectionUtil {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			System.out.println("xxx");
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return conn;
 	}
 }

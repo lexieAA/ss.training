@@ -2,7 +2,7 @@ package com.ss.lms.entity;
 
 import java.io.Serializable;
 
-public class Publisher implements Serializable{
+public class Publisher implements Serializable {
 	/**
 	 * 
 	 */
@@ -11,54 +11,63 @@ public class Publisher implements Serializable{
 	private String publisherName;
 	private String publisherAddress;
 	private String publisherPhone;
+
 	/**
 	 * @return the publisherId
 	 */
 	public Integer getPublisherId() {
 		return publisherId;
 	}
+
 	/**
 	 * @param publisherId the publisherId to set
 	 */
 	public void setPublisherId(Integer publisherId) {
 		this.publisherId = publisherId;
 	}
+
 	/**
 	 * @return the publisherName
 	 */
 	public String getPublisherName() {
 		return publisherName;
 	}
+
 	/**
 	 * @param publisherName the publisherName to set
 	 */
 	public void setPublisherName(String publisherName) {
 		this.publisherName = publisherName;
 	}
+
 	/**
 	 * @return the publisherAddress
 	 */
 	public String getPublisherAddress() {
 		return publisherAddress;
 	}
+
 	/**
 	 * @param publisherAddress the publisherAddress to set
 	 */
 	public void setPublisherAddress(String publisherAddress) {
 		this.publisherAddress = publisherAddress;
 	}
+
 	/**
 	 * @return the publisherPhone
 	 */
 	public String getPublisherPhone() {
 		return publisherPhone;
 	}
+
 	/**
 	 * @param publisherPhone the publisherPhone to set
 	 */
 	public void setPublisherPhone(String publisherPhone) {
 		this.publisherPhone = publisherPhone;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -69,6 +78,7 @@ public class Publisher implements Serializable{
 		result = prime * result + ((publisherPhone == null) ? 0 : publisherPhone.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -100,5 +110,5 @@ public class Publisher implements Serializable{
 			return false;
 		return true;
 	}
-	
+
 }

@@ -3,6 +3,7 @@ package com.ss.lms.service;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+
 import com.ss.lms.dao.BookCopiesDAO;
 import com.ss.lms.dao.BookDAO;
 import com.ss.lms.dao.LibraryBranchDAO;
@@ -41,7 +42,7 @@ public class LibraryService {
 		try {
 			conn = connUtil.getConnection();
 			LibraryBranchDAO adao = new LibraryBranchDAO(conn);
-			if (pk != null) {
+			if (pk != null) {//remove this later
 				LibraryBranch branch = new LibraryBranch();
 				branch.setBranchId(pk);
 				// return adao.readNameLibraryBranches(branch);
@@ -64,18 +65,19 @@ public class LibraryService {
 		return null;
 	}
 
-	public List<Book> readBook(Integer branchId, Integer cardNo) throws SQLException{
+	public List<Book> readBook(Integer branchId, Integer cardNo) throws SQLException {
 		Connection conn = null;
 		try {
 			conn = connUtil.getConnection();
 			BookDAO bdao = new BookDAO(conn);
-			if(cardNo != null & branchId == null) {
+			if (cardNo != null & branchId == null) {
 				List<Book> books = bdao.readAllBooksByCardAndBranch(cardNo, branchId);
 				return books;
-			}if(branchId != null) {
+			}
+			if (branchId != null) {
 				List<Book> books = bdao.readAllBooksByCardAndBranchWithCopy(branchId);
 				return books;
-			}else {
+			} else {
 				List<Book> books = bdao.readAllBooks();
 				int counter = 1;
 				for (Book a : books) {
@@ -84,10 +86,10 @@ public class LibraryService {
 				}
 				return books;
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(conn!=null){
+			if (conn != null) {
 				conn.close();
 			}
 		}
@@ -103,7 +105,7 @@ public class LibraryService {
 			copy.setBookId(bookId);
 			copy.setBranchId(branchId);
 			List<BookCopies> bookCopy = adao.readBookCopy(copy);
-				return bookCopy;
+			return bookCopy;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -113,17 +115,18 @@ public class LibraryService {
 		}
 		return null;
 	}
+
 	public void saveBookCopies(BookCopies copy, Integer bookId) throws SQLException {
 		Connection conn = null;
 		try {
 			conn = connUtil.getConnection();
 			BookCopiesDAO adao = new BookCopiesDAO(conn);
-			if(bookId != null) {
+			if (bookId != null) {
 				copy.setBookId(bookId);
 				copy.setNoOfCopies(0);
 				adao.addBookCopies(copy);
-				
-			}else {
+
+			} else {
 				adao.updateBookCopies(copy);
 			}
 			conn.commit(); // transaction

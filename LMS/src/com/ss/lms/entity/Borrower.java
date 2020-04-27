@@ -2,7 +2,7 @@ package com.ss.lms.entity;
 
 import java.io.Serializable;
 
-public class Borrower implements Serializable{
+public class Borrower implements Serializable {
 	/**
 	 * 
 	 */
@@ -11,54 +11,63 @@ public class Borrower implements Serializable{
 	private String borrowerName;
 	private String borrowerAddress;
 	private String borrowerPhone;
+
 	/**
 	 * @return the cardNo
 	 */
 	public Integer getCardNo() {
 		return cardNo;
 	}
+
 	/**
 	 * @param cardNo the cardNo to set
 	 */
 	public void setCardNo(Integer cardNo) {
 		this.cardNo = cardNo;
 	}
+
 	/**
 	 * @return the borrowerName
 	 */
 	public String getBorrowerName() {
 		return borrowerName;
 	}
+
 	/**
 	 * @param borrowerName the borrowerName to set
 	 */
 	public void setBorrowerName(String borrowerName) {
 		this.borrowerName = borrowerName;
 	}
+
 	/**
 	 * @return the borrowerAddress
 	 */
 	public String getBorrowerAddress() {
 		return borrowerAddress;
 	}
+
 	/**
 	 * @param borrowerAddress the borrowerAddress to set
 	 */
 	public void setBorrowerAddress(String borrowerAddress) {
 		this.borrowerAddress = borrowerAddress;
 	}
+
 	/**
 	 * @return the borrowerPhone
 	 */
 	public String getBorrowerPhone() {
 		return borrowerPhone;
 	}
+
 	/**
 	 * @param borrowerPhone the borrowerPhone to set
 	 */
 	public void setBorrowerPhone(String borrowerPhone) {
 		this.borrowerPhone = borrowerPhone;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -69,6 +78,7 @@ public class Borrower implements Serializable{
 		result = prime * result + ((cardNo == null) ? 0 : cardNo.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

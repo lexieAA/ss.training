@@ -24,6 +24,7 @@ import com.ss.lms.entity.Publisher;
 public class AdminService {
 
 	public ConnectionUtil connUtil = new ConnectionUtil();
+
 //------------------------------Author---------------------------------------------------
 	public void saveAuthor(Author author, int type) throws SQLException {
 		Connection conn = null;
@@ -55,9 +56,6 @@ public class AdminService {
 			conn = connUtil.getConnection();
 			AuthorDAO adao = new AuthorDAO(conn);
 			BookDAO bdao = new BookDAO(conn);
-			if (pk != null) {
-				// get author by primary key
-			} else {
 				List<Author> authors = adao.readAllAuthors();
 				for (Author a : authors) {
 					List<String> bookTitles = new ArrayList<>();
@@ -72,7 +70,6 @@ public class AdminService {
 					System.out.println("-------------------------------------------");
 				}
 				return authors;
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -82,6 +79,7 @@ public class AdminService {
 		}
 		return null;
 	}
+
 //------------------------------Genre---------------------------------------------------
 	public void saveGenre(Genre genre, int type) throws SQLException {
 		Connection conn = null;
@@ -128,151 +126,153 @@ public class AdminService {
 		}
 		return null;
 	}
-	
+
 //------------------------------LibraryBranch---------------------------------------------------
-		public void saveLibraryBranch(LibraryBranch branch, int type) throws SQLException {
-			Connection conn = null;
-			try {
-				conn = connUtil.getConnection();
-				LibraryBranchDAO adao = new LibraryBranchDAO(conn);
-				if (type == 2) {
-					adao.updateLibraryBranch(branch);
-				} else if (type == 3) {
-					adao.deleteLibraryBranch(branch);
-				} else {
-					adao.addLibraryBranch(branch);
-				}
-				System.out.println("Success");
-				conn.commit(); // transaction
-			} catch (ClassNotFoundException | SQLException e) {
-				e.printStackTrace();
-				conn.rollback();
-			} finally {
-				if (conn != null) {
-					conn.close();
-				}
+	public void saveLibraryBranch(LibraryBranch branch, int type) throws SQLException {
+		Connection conn = null;
+		try {
+			conn = connUtil.getConnection();
+			LibraryBranchDAO adao = new LibraryBranchDAO(conn);
+			if (type == 2) {
+				adao.updateLibraryBranch(branch);
+			} else if (type == 3) {
+				adao.deleteLibraryBranch(branch);
+			} else {
+				adao.addLibraryBranch(branch);
+			}
+			System.out.println("Success");
+			conn.commit(); // transaction
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			conn.rollback();
+		} finally {
+			if (conn != null) {
+				conn.close();
 			}
 		}
+	}
 
-		public List<LibraryBranch> readLibraryBranchs() throws SQLException {
-			Connection conn = null;
-			try {
-				conn = connUtil.getConnection();
-				LibraryBranchDAO adao = new LibraryBranchDAO(conn);
-				List<LibraryBranch> branchs = adao.readAllLibraryBranches();
-				for (LibraryBranch a : branchs) {
-					System.out.println("LibraryBranch Name: " + a.getBranchName());
-					System.out.println("LibraryBranch Id: " + a.getBranchId());
-					System.out.println("LibraryBranch Address: " + a.getBranchAddress());
-					System.out.println("-------------------------------------------");
-				}
-				return branchs;
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				if (conn != null) {
-					conn.close();
-				}
+	public List<LibraryBranch> readLibraryBranchs() throws SQLException {
+		Connection conn = null;
+		try {
+			conn = connUtil.getConnection();
+			LibraryBranchDAO adao = new LibraryBranchDAO(conn);
+			List<LibraryBranch> branchs = adao.readAllLibraryBranches();
+			for (LibraryBranch a : branchs) {
+				System.out.println("LibraryBranch Name: " + a.getBranchName());
+				System.out.println("LibraryBranch Id: " + a.getBranchId());
+				System.out.println("LibraryBranch Address: " + a.getBranchAddress());
+				System.out.println("-------------------------------------------");
 			}
-			return null;
+			return branchs;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
 		}
+		return null;
+	}
+
 //------------------------------Publisher---------------------------------------------------
-				public void savePublisher(Publisher publisher, int type) throws SQLException {
-					Connection conn = null;
-					try {
-						conn = connUtil.getConnection();
-						PublisherDAO adao = new PublisherDAO(conn);
-						if (type == 2) {
-							adao.updatePublisher(publisher);
-						} else if (type == 3) {
-							adao.deletePublisher(publisher);
-						} else {
-							adao.addPublisher(publisher);
-						}
-						System.out.println("Success");
-						conn.commit(); // transaction
-					} catch (ClassNotFoundException | SQLException e) {
-						e.printStackTrace();
-						conn.rollback();
-					} finally {
-						if (conn != null) {
-							conn.close();
-						}
-					}
-				}
+	public void savePublisher(Publisher publisher, int type) throws SQLException {
+		Connection conn = null;
+		try {
+			conn = connUtil.getConnection();
+			PublisherDAO adao = new PublisherDAO(conn);
+			if (type == 2) {
+				adao.updatePublisher(publisher);
+			} else if (type == 3) {
+				adao.deletePublisher(publisher);
+			} else {
+				adao.addPublisher(publisher);
+			}
+			System.out.println("Success");
+			conn.commit(); // transaction
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			conn.rollback();
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+	}
 
-				public List<Publisher> readPublishers() throws SQLException {
-					Connection conn = null;
-					try {
-						conn = connUtil.getConnection();
-						PublisherDAO adao = new PublisherDAO(conn);
-						List<Publisher> publishers = adao.readAllPublishers();
-						for (Publisher a : publishers) {
-							System.out.println("Publisher Name: " + a.getPublisherName());
-							System.out.println("Publisher Id: " + a.getPublisherId());
-							System.out.println("Publisher Address: " + a.getPublisherAddress());
-							System.out.println("Publisher Phone: " + a.getPublisherPhone());
-							System.out.println("-------------------------------------------");
-						}
-						return publishers;
-					} catch (Exception e) {
-						e.printStackTrace();
-					} finally {
-						if (conn != null) {
-							conn.close();
-						}
-					}
-					return null;
-				}
+	public List<Publisher> readPublishers() throws SQLException {
+		Connection conn = null;
+		try {
+			conn = connUtil.getConnection();
+			PublisherDAO adao = new PublisherDAO(conn);
+			List<Publisher> publishers = adao.readAllPublishers();
+			for (Publisher a : publishers) {
+				System.out.println("Publisher Name: " + a.getPublisherName());
+				System.out.println("Publisher Id: " + a.getPublisherId());
+				System.out.println("Publisher Address: " + a.getPublisherAddress());
+				System.out.println("Publisher Phone: " + a.getPublisherPhone());
+				System.out.println("-------------------------------------------");
+			}
+			return publishers;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		return null;
+	}
+
 //------------------------------Borrower---------------------------------------------------
-				public void saveBorrower(Borrower borrower, int type) throws SQLException {
-					Connection conn = null;
-					try {
-						conn = connUtil.getConnection();
-						BorrowerDAO adao = new BorrowerDAO(conn);
-						if (type == 2) {
-							adao.updateBorrower(borrower);
-						} else if (type == 3) {
-							adao.deleteBorrower(borrower);
-						} else {
-							adao.addBorrower(borrower);
-						}
-						System.out.println("Success");
-						conn.commit(); // transaction
-					} catch (ClassNotFoundException | SQLException e) {
-						e.printStackTrace();
-						conn.rollback();
-					} finally {
-						if (conn != null) {
-							conn.close();
-						}
-					}
-				}
+	public void saveBorrower(Borrower borrower, int type) throws SQLException {
+		Connection conn = null;
+		try {
+			conn = connUtil.getConnection();
+			BorrowerDAO adao = new BorrowerDAO(conn);
+			if (type == 2) {
+				adao.updateBorrower(borrower);
+			} else if (type == 3) {
+				adao.deleteBorrower(borrower);
+			} else {
+				adao.addBorrower(borrower);
+			}
+			System.out.println("Success");
+			conn.commit(); // transaction
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			conn.rollback();
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+	}
 
-				public List<Borrower> readBorrowers() throws SQLException {
-					Connection conn = null;
-					try {
-						conn = connUtil.getConnection();
-						BorrowerDAO adao = new BorrowerDAO(conn);
-						List<Borrower> borrowers = adao.readAllBorrowers();
-						for (Borrower a : borrowers) {
-							System.out.println("Borrower Name: " + a.getBorrowerName());
-							System.out.println("Borrower Card Number: " + a.getCardNo());
-							System.out.println("Borrower Address: " + a.getBorrowerAddress());
-							System.out.println("Borrower Phone: " + a.getBorrowerPhone());
-							System.out.println("-------------------------------------------");
-						}
-						return borrowers;
-					} catch (Exception e) {
-						e.printStackTrace();
-					} finally {
-						if (conn != null) {
-							conn.close();
-						}
-					}
-					return null;
-				}	
-	
+	public List<Borrower> readBorrowers() throws SQLException {
+		Connection conn = null;
+		try {
+			conn = connUtil.getConnection();
+			BorrowerDAO adao = new BorrowerDAO(conn);
+			List<Borrower> borrowers = adao.readAllBorrowers();
+			for (Borrower a : borrowers) {
+				System.out.println("Borrower Name: " + a.getBorrowerName());
+				System.out.println("Borrower Card Number: " + a.getCardNo());
+				System.out.println("Borrower Address: " + a.getBorrowerAddress());
+				System.out.println("Borrower Phone: " + a.getBorrowerPhone());
+				System.out.println("-------------------------------------------");
+			}
+			return borrowers;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		return null;
+	}
+
 //-----------------------------BookLoan----------------------------------------------
 	public List<BookLoan> readBookLoan(BookLoan loan, Date dateOut) throws SQLException {
 		Connection conn = null;
@@ -315,6 +315,5 @@ public class AdminService {
 	}
 
 //-------------------------------------------------------------------------------
-	
 
 }

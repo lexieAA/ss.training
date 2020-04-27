@@ -3,7 +3,7 @@ package com.ss.lms.entity;
 import java.io.Serializable;
 import java.util.List;
 
-public class Book implements Serializable{
+public class Book implements Serializable {
 	/**
 	 * 
 	 */
@@ -13,68 +13,78 @@ public class Book implements Serializable{
 	private List<Author> authors;
 	private List<Genre> genres;
 	private Integer publisherId;
-	//private List genres, branch, copies;
+
+	// private List genres, branch, copies;
 	/**
 	 * @return the bookId
 	 */
 	public Integer getBookId() {
 		return bookId;
 	}
+
 	/**
 	 * @param bookId the bookId to set
 	 */
 	public void setBookId(Integer bookId) {
 		this.bookId = bookId;
 	}
+
 	/**
 	 * @return the title
 	 */
 	public String getTitle() {
 		return title;
 	}
+
 	/**
 	 * @param title the title to set
 	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	/**
 	 * @return the authors
 	 */
 	public List<Author> getAuthors() {
 		return authors;
 	}
+
 	/**
 	 * @param authors the authors to set
 	 */
 	public void setAuthors(List<Author> authors) {
 		this.authors = authors;
 	}
-	
+
 	/**
 	 * @return the genres
 	 */
 	public List<Genre> getGenres() {
 		return genres;
 	}
+
 	/**
 	 * @param genres the genres to set
 	 */
 	public void setGenres(List<Genre> genres) {
 		this.genres = genres;
 	}
+
 	/**
 	 * @return the publisher
 	 */
 	public Integer getPublisherId() {
 		return publisherId;
 	}
+
 	/**
 	 * @param publisher the publisher to set
 	 */
-	public void setPublisherId (Integer publisherId) {
+	public void setPublisherId(Integer publisherId) {
 		this.publisherId = publisherId;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -86,6 +96,7 @@ public class Book implements Serializable{
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -122,5 +133,5 @@ public class Book implements Serializable{
 			return false;
 		return true;
 	}
-	
+
 }

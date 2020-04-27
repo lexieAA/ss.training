@@ -3,7 +3,7 @@ package com.ss.lms.entity;
 import java.io.Serializable;
 import java.util.List;
 
-public class Author implements Serializable{
+public class Author implements Serializable {
 	/**
 	 * 
 	 */
