@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ss.lms.entity.Author;
+import com.ss.lms.entity.Book;
 
 public class AuthorDAO extends BaseDAO<Author> {
 
@@ -16,6 +17,10 @@ public class AuthorDAO extends BaseDAO<Author> {
 
 	public void addAuthor(Author author) throws ClassNotFoundException, SQLException {
 		save("INSERT INTO tbl_author (authorName) VALUES (?)", new Object[] { author.getAuthorName() });
+	}
+	
+	public void addAuthorBooK(Integer authorId, Integer bookId) throws ClassNotFoundException, SQLException {
+		save("INSERT INTO tbl_book_authors (authorId, bookId) VALUES (?)", new Object[] { authorId, bookId });
 	}
 
 	public void updateAuthor(Author author) throws ClassNotFoundException, SQLException {
@@ -29,6 +34,15 @@ public class AuthorDAO extends BaseDAO<Author> {
 
 	public List<Author> readAllAuthors() throws ClassNotFoundException, SQLException {
 		return read("SELECT * FROM tbl_author", null);
+	}
+	
+//	public List<Author> readAuthorByBook() throws ClassNotFoundException, SQLException {
+//		return read("SELECT * FROM tbl_author WHERE authorId IN (SELECT bookId FROM tbl_book_authors WHERE authorId = ?", null);
+//	}
+	
+	public List<Author> readAuthorByBookID(Book book) throws ClassNotFoundException, SQLException {
+		return read("SELECT * FROM tbl_author WHERE authorId IN (SELECT authorId FROM tbl_book_authors WHERE bookId = ?)",
+				new Object[] { book.getBookId() });
 	}
 
 	@Override

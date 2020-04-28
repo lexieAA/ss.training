@@ -205,15 +205,15 @@ public class AdminService {
 		try {
 			conn = connUtil.getConnection();
 			PublisherDAO adao = new PublisherDAO(conn);
-			List<Publisher> publishers = adao.readAllPublishers();
-			for (Publisher a : publishers) {
-				System.out.println("Publisher Name: " + a.getPublisherName());
-				System.out.println("Publisher Id: " + a.getPublisherId());
-				System.out.println("Publisher Address: " + a.getPublisherAddress());
-				System.out.println("Publisher Phone: " + a.getPublisherPhone());
-				System.out.println("-------------------------------------------");
-			}
-			return publishers;
+			
+				List<Publisher> publishers = adao.readAllPublishers();
+				for (Publisher a : publishers) {
+					System.out.println("Publisher Name: " + a.getPublisherName());
+					System.out.println("Publisher Id: " + a.getPublisherId());
+					System.out.println("Publisher Address: " + a.getPublisherAddress());
+					System.out.println("Publisher Phone: " + a.getPublisherPhone());
+					System.out.println("-------------------------------------------");
+				}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -315,5 +315,132 @@ public class AdminService {
 	}
 
 //-------------------------------------------------------------------------------
+	//------------------------------Book---------------------------------------------------
+		public void saveBook(Book book, int type) throws SQLException {
+			Connection conn = null;
+			System.out.println("here");
+			try {
+				conn = connUtil.getConnection();
+				BookDAO adao = new BookDAO(conn);
+				if (type == 2) {
+					adao.updateBook(book);
+				} else if (type == 3) {
+					adao.deleteBook(book);
+				} else {
+					adao.addBook(book);
+				}
+				System.out.println("Success");
+				conn.commit(); // transaction
+			} catch (ClassNotFoundException | SQLException e) {
+				e.printStackTrace();
+				conn.rollback();
+			} finally {
+				if (conn != null) {
+					conn.close();
+				}
+			}
+		}
+		
+		public List<Book> getBook(Book book) throws SQLException {
+			Connection conn = null;
+			System.out.println("here");
+			try {
+				conn = connUtil.getConnection();
+				BookDAO adao = new BookDAO(conn);
+				List<Book> books = adao.readBookID(book);
+				conn.commit(); // transaction
+				return books;
+			} catch (ClassNotFoundException | SQLException e) {
+				e.printStackTrace();
+				conn.rollback();
+			} finally {
+				if (conn != null) {
+					conn.close();
+				}
+			}
+			return null;
+		}
+		
+		public void saveNewBookRelationships(Integer bookId, String[] newAuthorRelationships, 
+				String[] newGenreRelationships, String[] newLibBranchRelationships) throws SQLException {
+			Connection conn = null;
+			try {
+				conn = connUtil.getConnection();
+				//update author book table
+				AuthorDAO adao = new AuthorDAO(conn);
+				for (String author: newAuthorRelationships) {
+					adao.addAuthorBooK(Integer.valueOf(author), bookId);
+				}
+				//update genre book table
+				GenreDAO gdao = new GenreDAO(conn);
+				for (String genre: newGenreRelationships) {
+					gdao.addGenreBooK(Integer.valueOf(genre), bookId);
+				}
+				//update library branch book table
+				LibraryBranchDAO ldao = new LibraryBranchDAO(conn);
+				for (String branch: newLibBranchRelationships) {
+					ldao.addLibraryBranchBooK(Integer.valueOf(branch), bookId);
+				}
+				conn.commit(); // transaction
+			} catch (ClassNotFoundException | SQLException e) {
+				e.printStackTrace();
+				conn.rollback();
+			} finally {
+				if (conn != null) {
+					conn.close();
+				}
+			}
+		}
+
+		public List<Book> readBooks() throws SQLException {//readAuthorByBookID(Book book) 
+			Connection conn = null;
+			try {
+				conn = connUtil.getConnection();
+				BookDAO bdao = new BookDAO(conn);
+				AuthorDAO adao = new AuthorDAO(conn);
+				GenreDAO gdao = new GenreDAO(conn);
+				LibraryBranchDAO ldao = new LibraryBranchDAO(conn);
+				List<Book> books = bdao.readAllBooks();
+				for (Book book : books) {
+					System.out.println("Book Name: " + book.getTitle());
+					System.out.println("Book Id: " + book.getBookId());
+					System.out.println("Book Publisher: " + book.getPublisherId());
+					
+					//get all authors for book
+					List<String> authorName = new ArrayList<>();
+					List<Author> authors = adao.readAuthorByBookID(book);
+					for (Author a : authors) {
+						authorName.add(a.getAuthorName());
+					}
+					
+					//get all genres for book
+					List<String> genreName = new ArrayList<>();
+					List<Genre> genres = gdao.readGenresByBookID(book);
+					for (Genre a : genres) {
+						genreName.add(a.getGenreName());
+					}
+					
+					//get all library branches that have the book
+					List<String> branchName = new ArrayList<>();
+					List<LibraryBranch> branches = ldao.readLibraryBranchesByBookID(book);
+					for (LibraryBranch a : branches) {
+						branchName.add(a.getBranchName());
+					}
+					
+					System.out.println("Book's Author(s): " + authorName.toString());
+					System.out.println("Book's Genre(s): " + genreName.toString());
+					System.out.println("Library Branches with Copies: " + branchName.toString());
+					System.out.println("-------------------------------------------");
+				}
+				return books;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (conn != null) {
+					conn.close();
+				}
+			}
+			return null;
+		}
 
 }

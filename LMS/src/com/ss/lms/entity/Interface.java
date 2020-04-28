@@ -167,9 +167,9 @@ public class Interface extends Format {
 									}
 									if (type != 3) {
 										System.out.println("Enter Author Name: ");
-										userInput.nextLine();
 										input = userInput.nextLine();
 										author.setAuthorName(input);
+										System.out.println(input);
 									}
 									try {
 										adminSer.saveAuthor(author, type);
@@ -202,7 +202,6 @@ public class Interface extends Format {
 									}
 									if (type != 3) {
 										System.out.println("Enter Genre Name: ");
-										userInput.nextLine();
 										input = userInput.nextLine();
 										genre.setGenreName(input);
 									}
@@ -237,17 +236,14 @@ public class Interface extends Format {
 									}
 									if (type != 3) {
 										System.out.println("Enter Publisher Name: ");
-										userInput.nextLine();
 										input = userInput.nextLine();
 										publisher.setPublisherName(input);
 
 										System.out.println("Enter Publisher Address: ");
-										userInput.nextLine();
 										input = userInput.nextLine();
 										publisher.setPublisherAddress(input);
 
 										System.out.println("Enter Publisher Phone: ");
-										userInput.nextLine();
 										input = userInput.nextLine();
 										publisher.setPublisherPhone(input);
 									}
@@ -282,12 +278,10 @@ public class Interface extends Format {
 									}
 									if (type != 3) {
 										System.out.println("Enter Library Branch Name: ");
-										userInput.nextLine();
 										input = userInput.nextLine();
 										branch.setBranchName(input);
 
 										System.out.println("Enter Library Branch Address: ");
-										userInput.nextLine();
 										input = userInput.nextLine();
 										branch.setBranchAddress(input);
 									}
@@ -322,17 +316,14 @@ public class Interface extends Format {
 									}
 									if (type != 3) {
 										System.out.println("Enter Borrower Name: ");
-										userInput.nextLine();
 										input = userInput.nextLine();
 										borrower.setBorrowerName(input);
 
 										System.out.println("Enter Borrower Address: ");
-										userInput.nextLine();
 										input = userInput.nextLine();
 										borrower.setBorrowerAddress(input);
 
 										System.out.println("Enter Borrower Phone: ");
-										userInput.nextLine();
 										input = userInput.nextLine();
 										borrower.setBorrowerPhone(input);
 									}
@@ -350,6 +341,111 @@ public class Interface extends Format {
 								}
 								mainAdmin1 = false;
 								break;
+				//----====================--------------------------------------
+							case 8:
+								Book book = new Book();
+								adminMenu1(selection);
+								type = userInput.nextInt();
+								userInput.nextLine(); // Consume newline left-over
+								if (type == 5) {// back to main
+									mainAdmin1 = false;
+									break;
+								} else if (type != 4) {
+									if (type != 1) {// if add new don't ask for id
+										System.out.println("Enter Book Id: ");
+										selection = userInput.nextInt();
+										userInput.nextLine(); // Consume newline left-over
+										book.setBookId(selection);
+									}
+									if (type != 3) {
+										System.out.println("Enter Book tile: ");
+										userInput.nextLine();
+										input = userInput.nextLine();
+										book.setTitle(input);
+										
+										System.out.println("Select Book Publisher ID: ");
+										//list of all publishers
+										try {
+											adminSer.readPublishers();
+										} catch (SQLException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+										
+										selection = userInput.nextInt();
+										userInput.nextLine(); // Consume newline left-over
+										book.setPublisherId(selection);
+										
+										// create or update book
+										try {
+											adminSer.saveBook(book, type);
+										} catch (SQLException e) {
+											e.printStackTrace();
+										}
+										
+										//get bookId if book was new we assume no book has the same pubId and title 
+										if(type == 1) {
+											List<Book> theBook = null;
+											try {
+												theBook = adminSer.getBook(book);
+												book.setBookId(theBook.get(theBook.size() -1).getBookId());
+											} catch (SQLException e) {
+												e.printStackTrace();
+											}
+										}
+										
+										
+										System.out.println("Testing Book ID: " + book.getBookId());
+										
+										System.out.println("Select Book's Author(s) by Author ID use ',' to list: ");
+										//read all authors
+										try {
+											adminSer.readAuthors(null, null);
+										} catch (SQLException e) {
+											e.printStackTrace();
+										}
+										input = userInput.nextLine();
+										String[] newBookAuthorStrArray = input.split("\\s+|,\\s*|\\.\\s*");
+										
+										System.out.println("Select Book's Genre(s) by Genre ID use ',' to list: ");
+										//read all genres
+										try {
+											adminSer.readGenres();
+										} catch (SQLException e) {
+											e.printStackTrace();
+										}
+										input = userInput.nextLine();
+										String[] newBookGenreStrArray = input.split("\\s+|,\\s*|\\.\\s*");
+										
+										System.out.println("Select Library Branch(s) by Branch ID use ',' to list: ");
+										//read all library branches
+										try {
+											adminSer.readLibraryBranchs();
+										} catch (SQLException e) {
+											e.printStackTrace();
+										}
+										input = userInput.nextLine();
+										String[] newBookLibraryBranchStrArray = input.split("\\s+|,\\s*|\\.\\s*");
+										
+										//save new author(s), genre(s) and library branch(s) relationships
+										try {
+											adminSer.saveNewBookRelationships(book.getBookId(), newBookAuthorStrArray, 
+													newBookGenreStrArray,newBookLibraryBranchStrArray);
+										} catch (SQLException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+									}
+								} else { //if user selected to read book, read all book information
+									try {
+										adminSer.readBooks();
+									} catch (SQLException e) {
+										e.printStackTrace();
+									}
+								}
+								mainAdmin1 = false;
+								break;
+				//============================================
 							case 6:
 								BookLoan loan = new BookLoan();
 								boolean notfound = true;

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ss.lms.entity.Book;
 import com.ss.lms.entity.Genre;
 
 public class GenreDAO extends BaseDAO<Genre> {
@@ -17,6 +18,10 @@ public class GenreDAO extends BaseDAO<Genre> {
 	public void addGenre(Genre genre) throws ClassNotFoundException, SQLException {
 		save("INSERT INTO tbl_genre (genre_name) VALUES (?)", new Object[] { genre.getGenreName() });
 	}
+	
+	public void addGenreBooK(Integer genre_id, Integer bookId) throws ClassNotFoundException, SQLException {
+		save("INSERT INTO tbl_book_genres (genre_id, bookId) VALUES (?)", new Object[] { genre_id,bookId});
+	}
 
 	public void updateGenre(Genre genre) throws ClassNotFoundException, SQLException {
 		save("UPDATE tbl_genre SET genre_name = ? WHERE genre_id = ?",
@@ -25,6 +30,11 @@ public class GenreDAO extends BaseDAO<Genre> {
 
 	public void deleteGenre(Genre genre) throws ClassNotFoundException, SQLException {
 		save("DELETE FROM tbl_genre WHERE genre_id = ?", new Object[] { genre.getGenreId() });
+	}
+	
+	public List<Genre> readGenresByBookID(Book book) throws ClassNotFoundException, SQLException {
+		return read("SELECT * FROM tbl_genre WHERE genre_id IN (SELECT genre_id FROM tbl_book_genres WHERE bookId = ?)",
+				new Object[] { book.getBookId() });
 	}
 
 	public List<Genre> readAllGenres() throws ClassNotFoundException, SQLException {

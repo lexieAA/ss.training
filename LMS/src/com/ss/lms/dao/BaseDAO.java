@@ -36,7 +36,7 @@ public abstract class BaseDAO<T> {
 				index++;
 			}
 		}
-		pstmt.executeUpdate();
+		pstmt.executeQuery();
 		ResultSet rs = pstmt.executeQuery();
 		while (rs.next()) {
 			return rs.getInt(1);

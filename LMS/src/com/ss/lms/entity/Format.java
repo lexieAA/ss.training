@@ -39,6 +39,7 @@ public class Format {
 		System.out.println("\t5)Borrowers");
 		System.out.println("\t6)Over-ride Due Date for a Book Loan");
 		System.out.println("\t7)Quite to previous ");
+		//System.out.println("\t8)Book ");
 	}
 
 	public static void adminMenu1(int type) {
@@ -72,13 +73,6 @@ public class Format {
 		return adminType;
 	}
 
-	public static Boolean askName(int selected) {
-		if (selected == 2) {
-			return false;
-		} else {
-			return true;
-		}
-	}
 
 	public static void borrowerMenu() {
 		System.out.println("			Borrower");

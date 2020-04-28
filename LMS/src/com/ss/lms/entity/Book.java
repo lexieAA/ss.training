@@ -12,6 +12,21 @@ public class Book implements Serializable {
 	private String title;
 	private List<Author> authors;
 	private List<Genre> genres;
+	private List<LibraryBranch> branches;
+	/**
+	 * @return the branches
+	 */
+	public List<LibraryBranch> getBranches() {
+		return branches;
+	}
+
+	/**
+	 * @param branches the branches to set
+	 */
+	public void setBranches(List<LibraryBranch> branches) {
+		this.branches = branches;
+	}
+
 	private Integer publisherId;
 
 	// private List genres, branch, copies;
@@ -91,6 +106,7 @@ public class Book implements Serializable {
 		int result = 1;
 		result = prime * result + ((authors == null) ? 0 : authors.hashCode());
 		result = prime * result + ((bookId == null) ? 0 : bookId.hashCode());
+		result = prime * result + ((branches == null) ? 0 : branches.hashCode());
 		result = prime * result + ((genres == null) ? 0 : genres.hashCode());
 		result = prime * result + ((publisherId == null) ? 0 : publisherId.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
@@ -116,6 +132,11 @@ public class Book implements Serializable {
 				return false;
 		} else if (!bookId.equals(other.bookId))
 			return false;
+		if (branches == null) {
+			if (other.branches != null)
+				return false;
+		} else if (!branches.equals(other.branches))
+			return false;
 		if (genres == null) {
 			if (other.genres != null)
 				return false;
@@ -133,5 +154,7 @@ public class Book implements Serializable {
 			return false;
 		return true;
 	}
+
+	
 
 }

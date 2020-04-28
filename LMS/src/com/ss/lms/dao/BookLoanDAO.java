@@ -15,12 +15,12 @@ public class BookLoanDAO extends BaseDAO<BookLoan> {
 	}
 
 	public void addBookLoan(BookLoan loan) throws ClassNotFoundException, SQLException {
-		save("INSERT INTO tbl_book_loans (bookId, branchId, cardNo, dateOut, dueDate, dateIn) VALUES (?,?,?,CURRENT_TIMESTAMP, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 7 DAY),'0000-00-00 00:00:00')",
+		save("INSERT INTO tbl_book_loans (bookId, branchId, cardNo, dateOut, dueDate, dateIn) VALUES (?,?,?,CURRENT_TIMESTAMP, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 7 DAY),NULL)",
 				new Object[] { loan.getBookId(), loan.getBranchId(), loan.getCardNo() });
 	}
 
 	public void updateBookLoan(BookLoan loan) throws ClassNotFoundException, SQLException {
-		save("UPDATE tbl_book_loans SET dateIn = DATE_ADD(?, INTERVAL 1 DAY) WHERE bookId = ? AND branchId = ? AND cardNo = ? AND dateOut =?",
+		save("UPDATE tbl_book_loans SET dateIn = DATE_ADD(?, INTERVAL 1 DAY) WHERE bookId = ? AND branchId = ? AND cardNo = ? AND dateOut =? AND dateIn IS NULL",
 				new Object[] { loan.getDateIn(), loan.getBookId(), loan.getBranchId(), loan.getCardNo(),
 						loan.getDateOut() });
 	}
