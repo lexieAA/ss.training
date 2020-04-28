@@ -38,8 +38,9 @@ public class Format {
 		System.out.println("\t4)Library Branches");
 		System.out.println("\t5)Borrowers");
 		System.out.println("\t6)Over-ride Due Date for a Book Loan");
-		System.out.println("\t7)Quite to previous ");
-		//System.out.println("\t8)Book ");
+		System.out.println("\t7)Book ");
+		System.out.println("\t8)Quite to previous ");
+		
 	}
 
 	public static void adminMenu1(int type) {
@@ -68,6 +69,9 @@ public class Format {
 			break;
 		case 5:
 			adminType = "Borrower";
+			break;
+		case 7:
+			adminType = "Book";
 			break;
 		}
 		return adminType;

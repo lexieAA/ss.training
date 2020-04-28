@@ -342,7 +342,7 @@ public class Interface extends Format {
 								mainAdmin1 = false;
 								break;
 				//----====================--------------------------------------
-							case 8:
+							case 7:
 								Book book = new Book();
 								adminMenu1(selection);
 								type = userInput.nextInt();
@@ -495,7 +495,7 @@ public class Interface extends Format {
 								}
 								mainAdmin1 = false;
 								break;
-							case 7:
+							case 8:
 								mainAdmin = false;
 								mainAdmin1 = false;
 								break;
