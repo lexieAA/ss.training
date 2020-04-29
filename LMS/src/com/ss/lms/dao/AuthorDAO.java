@@ -20,7 +20,7 @@ public class AuthorDAO extends BaseDAO<Author> {
 	}
 	
 	public void addAuthorBooK(Integer authorId, Integer bookId) throws ClassNotFoundException, SQLException {
-		save("INSERT INTO tbl_book_authors (authorId, bookId) VALUES (?)", new Object[] { authorId, bookId });
+		save("INSERT INTO tbl_book_authors (authorId, bookId) VALUES (?,?)", new Object[] { authorId, bookId });
 	}
 
 	public void updateAuthor(Author author) throws ClassNotFoundException, SQLException {

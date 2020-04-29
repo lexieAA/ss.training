@@ -22,7 +22,7 @@ public class LibraryBranchDAO extends BaseDAO<LibraryBranch> {
 	}
 
 	public void addLibraryBranchBooK(Integer branchId, Integer bookId) throws ClassNotFoundException, SQLException {
-		save("INSERT INTO tbl_book_genres (branchId, bookId) VALUES (?)", new Object[] { branchId,bookId});
+		save("INSERT INTO tbl_book_copies (branchId, bookId) VALUES (?,?)", new Object[] { branchId,bookId});
 	}
 	
 	public void updateLibraryBranch(LibraryBranch branch) throws ClassNotFoundException, SQLException {

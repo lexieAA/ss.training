@@ -20,8 +20,8 @@ public class BookDAO extends BaseDAO<Book> {
 	}
 
 	public void updateBook(Book book) throws ClassNotFoundException, SQLException {
-		save("UPDATE tbl_book SET title = ? WHERE bookId = ?",
-				new Object[] { book.getTitle(), book.getBookId(), book.getPublisherId() });
+		save("UPDATE tbl_book SET title = ?, pubId =? WHERE bookId = ?",
+				new Object[] { book.getTitle(), book.getPublisherId(), book.getBookId() });
 	}
 
 	public void deleteBook(Book book) throws ClassNotFoundException, SQLException {

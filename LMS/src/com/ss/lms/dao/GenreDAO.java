@@ -20,7 +20,7 @@ public class GenreDAO extends BaseDAO<Genre> {
 	}
 	
 	public void addGenreBooK(Integer genre_id, Integer bookId) throws ClassNotFoundException, SQLException {
-		save("INSERT INTO tbl_book_genres (genre_id, bookId) VALUES (?)", new Object[] { genre_id,bookId});
+		save("INSERT INTO tbl_book_genres (genre_id, bookId) VALUES (?,?)", new Object[] { genre_id,bookId});
 	}
 
 	public void updateGenre(Genre genre) throws ClassNotFoundException, SQLException {

@@ -359,7 +359,7 @@ public class Interface extends Format {
 									}
 									if (type != 3) {
 										System.out.println("Enter Book tile: ");
-										userInput.nextLine();
+//										userInput.nextLine();
 										input = userInput.nextLine();
 										book.setTitle(input);
 										
@@ -435,7 +435,15 @@ public class Interface extends Format {
 											// TODO Auto-generated catch block
 											e.printStackTrace();
 										}
+									}else if(type == 3) {
+										// delete book
+										try {
+											adminSer.saveBook(book, type);
+										} catch (SQLException e) {
+											e.printStackTrace();
+										}
 									}
+								
 								} else { //if user selected to read book, read all book information
 									try {
 										adminSer.readBooks();
