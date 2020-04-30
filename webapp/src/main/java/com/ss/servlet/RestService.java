@@ -91,7 +91,6 @@ public class RestService extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String path = request.getRequestURI().substring(request.getContextPath().length());
 		boolean loginResult = false;
 		List<Login> usersLogin = new ArrayList<Login>();
 		
@@ -100,25 +99,21 @@ public class RestService extends HttpServlet {
 		usersLogin.add(new Login("Al", "123password"));
 		usersLogin.add(new Login("Natalie", "1234password"));
 		
-		if(path.contains("/user")) {
-			
-		
-			BufferedReader reader = request.getReader();
-			Gson gson = new Gson();
-			Login login = gson.fromJson(reader, Login.class);
-					
-			for (Login valid : usersLogin) {
-	            if (valid.getUserName().equals(login.getUserName()) && valid.getPassword().equals(login.getPassword()) ) {
-	            	loginResult = true;
-	            }
-	        }
-			
-			if(loginResult == true) {
-				response.setStatus(HttpServletResponse.SC_OK);
-			}else{
-				response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+		BufferedReader reader = request.getReader();
+		Gson gson = new Gson();
+		Login login = gson.fromJson(reader, Login.class);
+
+		for (Login valid : usersLogin) {
+			if (valid.getUserName().equals(login.getUserName()) && valid.getPassword().equals(login.getPassword())) {
+				loginResult = true;
 			}
 		}
-	}
+
+		if (loginResult == true) {
+			response.setStatus(HttpServletResponse.SC_OK);
+		} else {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+		}
+		}
 
 }
